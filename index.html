@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<!--
+PSEUDOCODE (high level):
+1. Full website layout for TSO Be Bolder Coffees.
+2. Hero section with background image.
+3. About, Menu, Visit, Contact sections.
+4. Mascot bottom-right, no glow.
+5. Floral divider image in header above nav.
+6. Menu items + address filled with real details from Square site.
+7. Headings + logo use Lobster font.
+8. Footer with auto-updating year.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TSO Be Bolder Coffees</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Lobster font for logo and section headings -->
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------------------------------------------------------
+       GLOBAL
+       --------------------------------------------------------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f7f4ee;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ---------------------------------------------------------
+       HEADER + NAVBAR
+       --------------------------------------------------------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 244, 238, 0.97);
+      border-bottom: 1px solid #e0d8c8;
+      backdrop-filter: blur(12px);
+    }
+
+    /* small centered floral image */
+    .header-divider {
+      display: block;
+      margin: 0.1rem auto 0.1rem auto;
+      width: 180px;
+      height: auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.2rem 0 0.35rem 0;
+    }
+
+    /* Logo uses Lobster */
+    .logo {
+      font-family: 'Lobster', cursive;
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    nav {
+      margin-left: auto;
+      margin-right: 1.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------------------------------------------------------
+       BUTTONS
+       --------------------------------------------------------- */
+    .btn-primary {
+      display: inline-block;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      background: #5a3825;
+      color: #fdfbf7;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid #5a3825;
+      background: transparent;
+      color: #5a3825;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* ---------------------------------------------------------
+       HERO
+       --------------------------------------------------------- */
+    .hero {
+      position: relative;
+      padding: 4.5rem 0 4rem;
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.55),
+          rgba(0, 0, 0, 0.35) 45%,
+          rgba(247, 244, 238, 1) 100%
+        ),
+        url("hero-coffee.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #fdfbf7;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+      color: #f3d9a4;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 2.8rem);
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #f7eee3;
+      margin-bottom: 1.5rem;
+      max-width: 28rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-note {
+      font-size: 0.9rem;
+      color: #4a2f1a; /* dark brown as requested */
+    }
+
+    .hero-card {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fdfbf7;
+    }
+
+    .hero-card-title {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-card-body {
+      font-size: 0.9rem;
+      color: #f7eee3;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #f9d9a6;
+      background: rgba(0,0,0,0.35);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* ---------------------------------------------------------
+       SECTIONS
+       --------------------------------------------------------- */
+    section {
+      padding: 3rem 0;
+      border-top: 1px solid #e4dbcd;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Section titles use Lobster too */
+    .section-header h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+
+    .section-header p {
+      max-width: 30rem;
+      font-size: 0.95rem;
+      color: #625446;
+    }
+
+    /* ---------------------------------------------------------
+       ABOUT
+       --------------------------------------------------------- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      margin-bottom: 0.9rem;
+    }
+
+    .about-highlight {
+      padding: 1rem;
+      border-radius: 1rem;
+      background: #f0e4d5;
+      font-size: 0.9rem;
+      color: #5a4d40;
+    }
+
+    /* ---------------------------------------------------------
+       MENU
+       --------------------------------------------------------- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .menu-item {
+      background: #fdfbf7;
+      border-radius: 1.1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid #e3dacb;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+
+    .menu-item-title {
+      font-weight: 600;
+    }
+
+    .menu-item-price {
+      font-weight: 600;
+      color: #5a3825;
+      white-space: nowrap;
+    }
+
+    .menu-item-desc {
+      font-size: 0.9rem;
+      color: #655243;
+    }
+
+    .menu-item-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #8b6a4d;
+    }
+
+    /* ---------------------------------------------------------
+       VISIT / CONTACT
+       --------------------------------------------------------- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .info-card {
+      background: #fdfbf7;
+      border-radius: 1rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid #e0d5c7;
+      font-size: 0.95rem;
+    }
+
+    .info-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    /* ---------------------------------------------------------
+       FOOTER
+       --------------------------------------------------------- */
+    footer {
+      padding: 1.5rem 0 2.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7a6a5a;
+    }
+
+    /* ---------------------------------------------------------
+       MASCOT
+       --------------------------------------------------------- */
+    .mascot-wrapper {
+      position: fixed;
+      right: 1.4rem;
+      bottom: 1.4rem;
+      z-index: 20;
+    }
+
+    .mascot-wrapper img {
+      display: block;
+      width: 120px;
+      max-width: 30vw;
+      height: auto;
+      filter: none;
+      background: none;
+    }
+
+    /* ---------------------------------------------------------
+       MOBILE
+       --------------------------------------------------------- */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .mascot-wrapper {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header id="top">
+    <div class="container">
+      <!-- floral divider above header text -->
+      <img src="header-floral.png" alt="Floral divider" class="header-divider">
+
+      <div class="nav">
+        <div class="logo">TSO BE BOLDER COFFEES</div>
+        <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#visit">Visit</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="btn-outline"
+           href="https://tso-be-bolder-coffees.square.site/"
+           target="_blank">
+          Order Online
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">Small batch • Bold flavor</div>
+            <h1>Craft coffee that keeps you bolder than your to-do list.</h1>
+            <p class="hero-subtitle">
+              Freshly roasted coffee and handcrafted drinks from a local shop that believes
+              in courage, community, and really good espresso.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary"
+                 href="https://tso-be-bolder-coffees.square.site/"
+                 target="_blank">
+                Order Now
+              </a>
+              <a class="btn-outline" href="#menu">View Menu</a>
+            </div>
+            <div class="hero-note">
+              Open for pickup &amp; local orders. Secure payments processed through Square.
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-title">Today’s Highlights</div>
+            <div class="hero-card-body">
+              • Limited small-batch roast<br>
+              • Seasonal latte menu<br>
+              • House-made syrups &amp; alt milks
+            </div>
+            <span class="hero-card-label">Now pouring</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>About Tso-Be-Bolder Coffee</h2>
+          <p>A local coffee concept built around bravery, belonging, and that perfect first sip.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Our shop started with a simple idea: coffee should do more than wake you up —
+              it should remind you to keep going, keep dreaming, and keep being bolder than yesterday.
+            </p>
+            <p>
+              We focus on small-batch beans, thoughtful flavor profiles, and a menu that feels cozy,
+              approachable, and just a little bit adventurous.
+            </p>
+            <p>
+              Whether you're popping in between classes, working remotely, or catching up with friends,
+              we’ve got a seat and a cup waiting for you.
+            </p>
+          </div>
+
+          <div class="about-highlight">
+            <strong>What we care about:</strong><br><br>
+            • Ethically sourced beans<br>
+            • Inclusive, welcoming space<br>
+            • Craft drinks without the pretension<br>
+            • Supporting local makers &amp; events
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu">
+      <div class="container">
+        <div class="section-header">
+          <h2>Signature Menu</h2>
+          <p>Order ahead, pick up at Verano, and enjoy small-batch coffee made with locally roasted beans.</p>
+        </div>
+
+        <div class="menu-grid">
+          <!-- HOW TO ORDER -->
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">How to Order</div>
+                <div class="menu-item-tag">Pickup Details</div>
+              </div>
+            </div>
+            <p class="menu-item-desc">
+              Choose a pickup time between <strong>7:00 a.m. and 1:00 p.m.</strong><br><br>
+              Verano Townhomes<br>
+              Building #17<br> 
+	      Apt #1184<br>
+              Off Ranch Circle Rd<br><br>
+              All drinks made with fresh beans from a local roastery.
+            </p>
+          </article>
+
+          <!-- ICED LATTES -->
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Classic Iced Latte</div>
+                <div class="menu-item-tag">Iced Latte</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              Espresso + milk over ice. Simple, smooth, and refreshing.
+            </p>
+          </article>
+
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Vanilla Bean</div>
+                <div class="menu-item-tag">Iced Latte</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              Subtle, smooth, and sweet with a vanilla bean finish.
+            </p>
+          </article>
+
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Caramel Dream</div>
+                <div class="menu-item-tag">Iced Latte</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              Buttery and rich, iced and creamy.
+            </p>
+          </article>
+
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Mocha Latte</div>
+                <div class="menu-item-tag">Iced Latte</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              Espresso meets dark chocolate for a bold, cozy mocha.
+            </p>
+          </article>
+
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Brown Sugar Cinnamon</div>
+                <div class="menu-item-tag">Iced / Hot</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              A cozy classic with brown sugar and cinnamon—great iced or hot.
+            </p>
+          </article>
+
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">PB Mocha</div>
+                <div class="menu-item-tag">Iced Latte</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              Chocolate + peanut butter combo—super bold and decadent.
+            </p>
+          </article>
+
+          <!-- COLD BREW -->
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Sweet Cream Cold Brew</div>
+                <div class="menu-item-tag">Cold Brew</div>
+              </div>
+              <div class="menu-item-price">$5.00</div>
+            </div>
+            <p class="menu-item-desc">
+              16-hour steeped cold brew topped with vanilla sweet cream.
+            </p>
+          </article>
+
+          <!-- CUSTOMIZE IT -->
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">Customize It</div>
+                <div class="menu-item-tag">Add-ons</div>
+              </div>
+            </div>
+            <p class="menu-item-desc">
+              • <strong>Milk Options:</strong> Whole, Oat, Almond (+$1)<br>
+              • <strong>Extra Shot:</strong> +1 shot (+$1)<br>
+              • <strong>Cold Foam:</strong> Vanilla or Sea Salt Caramel (+$1)<br>
+              • <strong>Sweetness Level:</strong> Light / Medium / Sweet
+            </p>
+          </article>
+
+          <!-- WEEKLY SPECIAL -->
+          <article class="menu-item">
+            <div class="menu-item-header">
+              <div>
+                <div class="menu-item-title">This Week: Honey Lavender Iced Latte</div>
+                <div class="menu-item-tag">Weekly Special</div>
+              </div>
+              <div class="menu-item-price">$5.50</div>
+            </div>
+            <p class="menu-item-desc">
+              Floral, lightly sweet, and perfect for spring.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section id="visit">
+      <div class="container">
+        <div class="section-header">
+          <h2>Visit Us</h2>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>Hours</h3>
+            <p>Pickup available:<br>Mon–Fri: 7 AM–1 PM</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Location</h3>
+            <p>
+              Verano Townhomes<br>
+              Building #17 Apt #1184<br>
+              Off Ranch Circle Rd
+            </p>
+            <br>
+            <a class="btn-outline" href="https://maps.google.com" target="_blank">
+              Open in Maps
+            </a>
+          </div>
+
+          <div class="info-card" id="contact">
+            <h3>Contact</h3>
+            <p>Email: <a href="mailto:hello@yourcoffee.com">hello@yourcoffee.com</a></p>
+            <p>Instagram: @yourcoffeehandle</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MASCOT -->
+  <div class="mascot-wrapper">
+    <img src="barista-mascot.png" alt="Coffee shop barista mascot">
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © <span id="year"></span> TSO Be Bolder Coffees. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+ 

@@ -6,7 +6,7 @@ PSEUDOCODE (high level):
 3. About, Menu, Visit, Contact sections.
 4. Mascot bottom-right, no glow.
 5. Floral divider image in header above nav.
-6. Menu items + address filled with real details from Square site.
+6. Menu items + address filled with real details.
 7. Headings + logo use Lobster font.
 8. Footer with auto-updating year.
 -->
@@ -193,7 +193,7 @@ PSEUDOCODE (high level):
 
     .hero-note {
       font-size: 0.9rem;
-      color: #4a2f1a; /* dark brown as requested */
+      color: #4a2f1a; /* dark brown */
     }
 
     .hero-card {
@@ -243,7 +243,7 @@ PSEUDOCODE (high level):
       margin-bottom: 2rem;
     }
 
-    /* Section titles use Lobster too */
+    /* Section titles use Lobster */
     .section-header h2 {
       font-family: 'Lobster', cursive;
       font-size: 1.8rem;
@@ -395,9 +395,8 @@ PSEUDOCODE (high level):
         align-items: flex-start;
       }
 
-      .mascot-wrapper {
-        display: none;
-      }
+      /* NOTE: we no longer hide .mascot-wrapper here
+         so the bitmoji appears on mobile too */
     }
   </style>
 </head>
@@ -522,8 +521,7 @@ PSEUDOCODE (high level):
             <p class="menu-item-desc">
               Choose a pickup time between <strong>7:00 a.m. and 1:00 p.m.</strong><br><br>
               Verano Townhomes<br>
-              Building #17<br> 
-	      Apt #1184<br>
+              Building #17 Apt #1184<br>
               Off Ranch Circle Rd<br><br>
               All drinks made with fresh beans from a local roastery.
             </p>
@@ -660,6 +658,7 @@ PSEUDOCODE (high level):
       <div class="container">
         <div class="section-header">
           <h2>Visit Us</h2>
+          <p>Pickup location for all online orders.</p>
         </div>
 
         <div class="info-grid">
@@ -708,4 +707,3 @@ PSEUDOCODE (high level):
 
 </body>
 </html>
- 
